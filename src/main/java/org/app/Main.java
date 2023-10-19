@@ -20,6 +20,7 @@ public class Main {
                 principal.setContentPane(principal.getMainFrame());
                 principal.setTitle("Sistema de Revenda - Marcos Goncalves Teixeira");
                 principal.setSize(1200, 800);
+                principal.setLocationRelativeTo(null);
                 principal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             } catch (Exception e) {
                 e.printStackTrace();

@@ -22,9 +22,26 @@
                 <artifactId>lombok</artifactId>
                 <optional>true</optional>
             </dependency>
+            <dependency>
+                <groupId>org.modelmapper</groupId>
+                <artifactId>modelmapper</artifactId>
+                <version>3.0.0</version>
+            </dependency>
         </dependency>
         </dependencies>
 
     </properties>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>6.0.12</version>
+        </dependency>
+        <dependency>
+            <groupId>org.modelmapper</groupId>
+            <artifactId>modelmapper</artifactId>
+            <version>3.0.0</version>
+        </dependency>
+    </dependencies>
 
 </project>

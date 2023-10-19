@@ -12,11 +12,13 @@ public class CadMunicipio extends JFrame {
     private JPanel pnlMain;
     private JButton btnCadastrar;
     private JButton btnCancelar;
+    private JTextField textField1;
 
     public CadMunicipio() {
         btnCadastrar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
             }
         });
