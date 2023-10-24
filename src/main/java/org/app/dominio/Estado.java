@@ -1,8 +1,13 @@
 package org.app.dominio;
 
+import com.google.gson.Gson;
+import lombok.NoArgsConstructor;
+
 import java.io.Serializable;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
+
+@NoArgsConstructor
 
 public class Estado implements Serializable {
     private long id;
@@ -23,17 +28,20 @@ private String nome;
 
     public static Object[][]  fromJson(String body) {
         if (body.contains("content")){
-            String[] linhas = body.split("content\":\\[")[1].split("]")[0].split("},");
+            Gson gson = new Gson();
+
+            String[] linhas = body.split("content\":\\[")[1].split("]")[0].split("},*");
+
+            List<Estado> list = new ArrayList<>();
+            for (String s: linhas){
+                Estado estado = gson.fromJson(s+"}", Estado.class);
+                list.add(estado);
+            }
             Object[][] estados = new Object[linhas.length][2];
+
             for (int i = 0; i < linhas.length; i++) {
-                String[] colunas = linhas[i].split(",");
-                for (int j = 0; j < colunas.length; j++) {
-                    String[] atributo = colunas[j].split(":");
-                    if (atributo[0].contains("id"))
-                        estados[i][0] = atributo[1];
-                    else if (atributo[0].contains("nome"))
-                        estados[i][1] = atributo[1].replace("\"", "").replace("}", "");
-                }
+                estados[i][0] = list.get(i).getId();
+                estados[i][1] = list.get(i).getNome();
             }
             return estados;
         }

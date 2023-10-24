@@ -8,7 +8,6 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.util.ArrayList;
 import java.util.List;
 
 public class EstadoRepositorio implements Serializable {
@@ -24,7 +23,8 @@ public class EstadoRepositorio implements Serializable {
 
     }
     public Object[][] listarTodos(){
-        Object[][] estados = null;
+       Object[][] estados = null;
+
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(Configuracoes.LOCALHOST + "/listarEstados"))

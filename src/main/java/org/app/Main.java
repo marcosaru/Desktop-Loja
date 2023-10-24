@@ -28,3 +28,24 @@ public class Main {
         }
 
     }
+    /*
+
+    "content": [
+            {
+            "id": 1,
+            "nome": "Bahia"
+            },
+            {
+            "id": 2,
+            "nome": "São Paulo"
+            },
+            {
+            "id": 52,
+            "nome": "PARANA"
+            },
+            {
+            "id": 53,
+            "nome": "GOIAS"
+            }
+            ]
+*/

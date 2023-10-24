@@ -1,10 +1,13 @@
 package org.app.Views;
 
+import org.app.dominio.Estado;
 import org.app.repository.EstadoRepositorio;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import java.awt.*;
+import java.awt.event.*;
 
 public class ListEstados extends JFrame {
     private JPanel pnlMain;
@@ -12,6 +15,11 @@ public class ListEstados extends JFrame {
     private JButton btnEditar;
     private JPanel pnlBotoes;
     private JButton btnCancelar;
+
+    public JPanel getPnlTable() {
+        return new JPanel();
+    }
+
     private JPanel pnlTable;
     private String[] colunas = {"ID","Estado"};
 
@@ -19,19 +27,24 @@ public class ListEstados extends JFrame {
         return pnlMain;
     }
     public ListEstados(){
-        pnlMain = new JPanel();
-        pnlBotoes = new JPanel();
-        pnlBotoes.setVisible(true);
         EstadoRepositorio estadoRepositorio = new EstadoRepositorio();
         Object[][] estados = estadoRepositorio.listarTodos();
-        JScrollPane barraRolagem = new JScrollPane(tblEstados);
-        pnlMain.add(barraRolagem);
+        GridLayout layoutMain = new GridLayout(2,1);
+        GridLayout layoutBotoes = new GridLayout(1,2);
+        GridLayout layoutTable = new GridLayout(1,1);
+        //pnlMain = new JPanel(layoutMain);
+        pnlBotoes = new JPanel(layoutBotoes);
+        pnlTable = new JPanel(layoutTable);
 
+        DefaultTableModel defaultTableModel = new DefaultTableModel(estados,colunas);
+        tblEstados.setModel(defaultTableModel);
 
-        pnlMain.add(pnlBotoes);
-        pnlMain.add(btnEditar);
-        pnlMain.add(btnCancelar);
+        add(pnlTable);
+        add(pnlBotoes);
+        setContentPane(pnlMain);
 
+        setVisible(true);
+        setLayout(layoutMain);
 
         btnEditar.addActionListener(new ActionListener() {
             @Override
@@ -46,6 +59,41 @@ public class ListEstados extends JFrame {
                 cadEstados.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             }
         });
+        btnEditar.addComponentListener(new ComponentAdapter() {
+        });
+        btnEditar.addContainerListener(new ContainerAdapter() {
+        });
+        btnEditar.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                if (tblEstados.getColumnSelectionAllowed()){
+                    JOptionPane.showMessageDialog(null,"Selecione um estado para editar");
+                }
+            }
+        });
+        btnCancelar.addMouseMotionListener(new MouseMotionAdapter() {
+        });
+        btnCancelar.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                dispose();
+            }
+        });
+        pnlMain.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                super.keyPressed(e);
+                if (e.getKeyCode() == KeyEvent.VK_ESCAPE)
+                    dispose();
+            }
+        });
+        pnlMain.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                super.keyTyped(e);
+            }
+        });
     }
-
 }

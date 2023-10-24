@@ -1,5 +1,7 @@
 package org.app.Views;
 
+import lombok.Getter;
+
 import javax.swing.*;
 
 public class CadEstados extends JFrame {
@@ -7,12 +9,11 @@ public class CadEstados extends JFrame {
     private JButton btnSalvar;
     private JTextField EdtNome;
     private JLabel lbl;
+    @Getter
     private JPanel pnlMain;
     private JTextField EdtId;
 
-    public JPanel getPnlMain() {
-        return pnlMain;
-    }
+
     public CadEstados(String string, String s){
         EdtNome.setText(s);
         EdtId.setText(string);
