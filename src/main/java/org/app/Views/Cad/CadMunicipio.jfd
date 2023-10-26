@@ -5,24 +5,25 @@ new FormModel {
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class net.miginfocom.swing.MigLayout ) {
 			"$layoutConstraints": "hidemode 3"
-			"$columnConstraints": "[fill][fill][fill][fill][fill][43,fill][130,fill][fill]"
-			"$rowConstraints": "[][][][][][45][]"
+			"$columnConstraints": "[fill][fill][fill][fill][fill][43,fill][130,fill][69,fill]"
+			"$rowConstraints": "[][][][][][45][70][]"
 		} ) {
 			name: "this"
-			"title": "Cadastrar Estado"
+			"title": "Cadastrar Municipio"
+			addEvent( new FormEvent( "java.awt.event.KeyListener", "keyPressed", "thisKeyPressed", true ) )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label1"
 				"text": "ID"
 				"font": &SwingDerivedFont0 new com.jformdesigner.model.SwingDerivedFont( null, 0, 2, false )
 				"horizontalAlignment": 4
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 1 1"
+				"value": "cell 1 0"
 			} )
 			add( new FormComponent( "javax.swing.JTextField" ) {
 				name: "edtID"
 				"enabled": false
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 2 1 4 1"
+				"value": "cell 3 0 3 1"
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label2"
@@ -30,19 +31,26 @@ new FormModel {
 				"font": #SwingDerivedFont0
 				"horizontalAlignment": 4
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 1 3"
+				"value": "cell 1 1"
 			} )
 			add( new FormComponent( "javax.swing.JTextField" ) {
 				name: "edtEstado"
+				addEvent( new FormEvent( "java.awt.event.KeyListener", "keyPressed", "edtEstadoKeyPressed", true ) )
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 2 3 5 1"
+				"value": "cell 3 1 4 1"
 			} )
-			add( new FormComponent( "javax.swing.JButton" ) {
-				name: "button1"
-				"text": "O"
-				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "button1", true ) )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label3"
+				"text": "Municipio"
+				"font": #SwingDerivedFont0
+				"horizontalAlignment": 4
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 1 5"
+				"value": "cell 1 3"
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "edtEstado2"
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 3 3 4 1"
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "btnCancelar"
@@ -59,8 +67,8 @@ new FormModel {
 				"value": "cell 6 5"
 			} )
 		}, new FormLayoutConstraints( null ) {
+			"size": new java.awt.Dimension( 490, 200 )
 			"location": new java.awt.Point( 0, 0 )
-			"size": new java.awt.Dimension( 385, 210 )
 		} )
 	}
 }

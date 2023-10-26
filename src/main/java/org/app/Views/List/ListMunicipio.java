@@ -1,112 +1,86 @@
 /*
- * Created by JFormDesigner on Wed Oct 25 10:20:11 BRT 2023
+ * Created by JFormDesigner on Thu Oct 26 14:14:33 BRT 2023
  */
 
 package org.app.Views.List;
 
 import java.awt.event.*;
 import javax.swing.*;
-import javax.swing.border.*;
-import javax.swing.table.*;
 import javax.swing.table.DefaultTableModel;
 
 import lombok.Getter;
 import lombok.Setter;
 import net.miginfocom.swing.*;
-import org.app.Views.Cad.CadEstado;
-import org.app.dominio.Estado;
+import org.app.Views.Cad.CadMunicipio;
 import org.app.repository.EstadoRepositorio;
+import org.app.repository.MunicipioRepositorio;
 
 /**
  * @author marcos
  */
-public class EstadoList extends JFrame {
-    private String[] colunas = {"ID","Estado"};
-    private Object[][] estados;
+public class ListMunicipio extends JFrame {
     @Getter
     @Setter
-    private Estado selectedEstado;
-    public boolean selecionado;
-    public EstadoList() {
+    private Object[][] municipios = null;
+    private String[] colunas = {"ID Municipio","Municipio","ID Estado","Estado"};
+    public ListMunicipio() {
         initComponents();
         setVisible(true);
         setSize(600, 550);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        EstadoRepositorio estadoRepositorio = new EstadoRepositorio();
-        estados = estadoRepositorio.listarTodos();
-
-        DefaultTableModel model = new DefaultTableModel(estados,colunas){
-            boolean[] columnEditable = new boolean[] {
-                    false, true
-            };
+        MunicipioRepositorio municipioRepositorio = new MunicipioRepositorio();
+        setMunicipios(municipioRepositorio.listar());
+        DefaultTableModel model = new DefaultTableModel(getMunicipios(),colunas){
             @Override
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
+            public boolean isCellEditable(final int row, final int column) {
                 return false;
             }
         };
-
-        tbl.setModel(model);
-        tbl.getTableHeader().setResizingAllowed(false);
-
+        tblMunicipios.setModel(model);
+        tblMunicipios.getTableHeader().setResizingAllowed(false);
     }
 
     private void thisKeyPressed(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_ESCAPE)
-            dispose();
-        else if (e.getKeyCode() == 1)
-            dispose();
+        if(e.getKeyCode() == 27)
+            btnFechar(null);
+
+    }
+
+    private void thisWindowActivated(WindowEvent e) {
+        // TODO add your code here
+    }
+
+    private void tblEstadosMouseClicked(MouseEvent e) {
+        // TODO add your code here
     }
 
     private void btnIncluir(ActionEvent e) {
-        // TODO add your code here
-        CadEstado cadEstados = new CadEstado();
-    }
-
-    private void btnFechar(ActionEvent e) {
-        // TODO add your code here
-        dispose();
+        CadMunicipio cadMunicipio = new CadMunicipio();
     }
 
     private void btnEditar(ActionEvent e) {
         // TODO add your code here
-        int selectedRow = tbl.getSelectedRow();
-        CadEstado cadEstado = new CadEstado(estados[selectedRow][0].toString(),estados[selectedRow][1].toString());
     }
 
-    private void thisWindowActivated(WindowEvent e) {
-        EstadoRepositorio estadoRepositorio = new EstadoRepositorio();
-        estados = estadoRepositorio.listarTodos();
-
-    }
-    private void tblEstadosMouseClicked(MouseEvent e) {
-        System.out.println("getButton: "+e.getButton());
-        System.out.println("qtdClick: "+e.getClickCount());
-        if (e.getClickCount() >= 2 && e.getButton() == 1){
-            System.out.println("oi");
-        }
-    }
-
-    private void tblMouseClicked(MouseEvent e) {
-        if (e.getClickCount() >= 2 && e.getButton() == 1){
-            setVisible(false);
-            setSelectedEstado(new Estado((Long) estados[tbl.getSelectedRow()][0], (String) estados[tbl.getSelectedRow()][1]));
-        }
+    private void btnFechar(ActionEvent e) {
+        if(JOptionPane.showConfirmDialog(null,"Você gostaria de sair?","Confirme sua ação",JOptionPane.OK_CANCEL_OPTION) == 0)
+            dispose();
     }
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
         // Generated using JFormDesigner Evaluation license - MARCOS GONCALVES TEIXEIRA
         label1 = new JLabel();
-        btnIncluir = new JButton();
         scrollPane1 = new JScrollPane();
-        tbl = new JTable();
+        tblMunicipios = new JTable();
+        btnIncluir = new JButton();
         btnEditar = new JButton();
         btnFechar = new JButton();
 
         //======== this ========
         setResizable(false);
-        setTitle("Estados Cadastrados");
+        setTitle("Municipios Cadastrados");
         addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
@@ -142,27 +116,30 @@ public class EstadoList extends JFrame {
             "[]"));
 
         //---- label1 ----
-        label1.setText("Listagem de Estados");
+        label1.setText("Listagem de Municipios");
         contentPane.add(label1, "cell 3 1,alignx center,growx 0");
+
+        //======== scrollPane1 ========
+        {
+
+            //---- tblMunicipios ----
+            tblMunicipios.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+            tblMunicipios.setCellSelectionEnabled(true);
+            tblMunicipios.setToolTipText("Para editar utilize o bot\u00e3o de edi\u00e7\u00e3o.");
+            tblMunicipios.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    tblEstadosMouseClicked(e);
+                }
+            });
+            scrollPane1.setViewportView(tblMunicipios);
+        }
+        contentPane.add(scrollPane1, "cell 1 2 3 4");
 
         //---- btnIncluir ----
         btnIncluir.setText("Incluir");
         btnIncluir.addActionListener(e -> btnIncluir(e));
         contentPane.add(btnIncluir, "cell 5 2");
-
-        //======== scrollPane1 ========
-        {
-
-            //---- tbl ----
-            tbl.addMouseListener(new MouseAdapter() {
-                @Override
-                public void mouseClicked(MouseEvent e) {
-                    tblMouseClicked(e);
-                }
-            });
-            scrollPane1.setViewportView(tbl);
-        }
-        contentPane.add(scrollPane1, "cell 3 3");
 
         //---- btnEditar ----
         btnEditar.setText("Editar");
@@ -181,9 +158,9 @@ public class EstadoList extends JFrame {
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables  @formatter:off
     // Generated using JFormDesigner Evaluation license - MARCOS GONCALVES TEIXEIRA
     private JLabel label1;
-    private JButton btnIncluir;
     private JScrollPane scrollPane1;
-    private JTable tbl;
+    private JTable tblMunicipios;
+    private JButton btnIncluir;
     private JButton btnEditar;
     private JButton btnFechar;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on

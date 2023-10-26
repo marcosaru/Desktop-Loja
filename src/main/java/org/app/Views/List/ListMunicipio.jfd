@@ -10,14 +10,26 @@ new FormModel {
 		} ) {
 			name: "this"
 			"resizable": false
-			"title": "Estados Cadastrados"
+			"title": "Municipios Cadastrados"
 			addEvent( new FormEvent( "java.awt.event.KeyListener", "keyPressed", "thisKeyPressed", true ) )
 			addEvent( new FormEvent( "java.awt.event.WindowListener", "windowActivated", "thisWindowActivated", true ) )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label1"
-				"text": "Listagem de Estados"
+				"text": "Listagem de Municipios"
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 				"value": "cell 3 1,alignx center,growx 0"
+			} )
+			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+				name: "scrollPane1"
+				add( new FormComponent( "javax.swing.JTable" ) {
+					name: "tblMunicipios"
+					"selectionMode": 0
+					"cellSelectionEnabled": true
+					"toolTipText": "Para editar utilize o botão de edição."
+					addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "tblEstadosMouseClicked", true ) )
+				} )
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 1 2 3 4"
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "btnIncluir"
@@ -25,15 +37,6 @@ new FormModel {
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btnIncluir", true ) )
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 				"value": "cell 5 2"
-			} )
-			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
-				name: "scrollPane1"
-				add( new FormComponent( "javax.swing.JTable" ) {
-					name: "tbl"
-					addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "tblMouseClicked", true ) )
-				} )
-			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 3 3"
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "btnEditar"
@@ -50,8 +53,8 @@ new FormModel {
 				"value": "cell 5 4"
 			} )
 		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 10, 0 )
 			"size": new java.awt.Dimension( 625, 535 )
+			"location": new java.awt.Point( 0, 0 )
 		} )
 	}
 }

@@ -119,6 +119,7 @@ public class CadEstado extends JFrame {
         btnConfirma = new JButton();
 
         //======== this ========
+        setTitle("Cadastrar Estado");
         var contentPane = getContentPane();
         contentPane.setLayout(new MigLayout(
             "hidemode 3",
