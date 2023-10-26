@@ -1,6 +1,6 @@
 package org.app;
 
-import org.app.Views.Principal;
+import org.app.Views.MainForm;
 import org.app.dominio.DataBase;
 
 import javax.swing.*;
@@ -15,13 +15,7 @@ public class Main {
         String url = "jdbc:postgresql://localhost:5432/";
         Connection connection = DataBase.conexao(url,host,user,password);
             try{
-                Principal principal = new Principal();
-                principal.setVisible(true);
-                principal.setContentPane(principal.getMainFrame());
-                principal.setTitle("Sistema de Revenda - Marcos Goncalves Teixeira");
-                principal.setSize(1200, 800);
-                principal.setLocationRelativeTo(null);
-                principal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                MainForm mainForm = new MainForm();
             } catch (Exception e) {
                 e.printStackTrace();
             }

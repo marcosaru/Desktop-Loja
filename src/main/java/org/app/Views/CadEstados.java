@@ -17,5 +17,14 @@ public class CadEstados extends JFrame {
     public CadEstados(String string, String s){
         EdtNome.setText(s);
         EdtId.setText(string);
+        setVisible(true);
+        setContentPane(getPnlMain());
+        setTitle("Cadastro de Estados");
+        setSize(395, 235);
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    }
+    public CadEstados(){
+        this("","");
     }
 }

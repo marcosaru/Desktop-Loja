@@ -1,15 +1,16 @@
 package org.app.Views;
 
+import lombok.Getter;
 import org.app.dominio.Estado;
 import org.app.repository.EstadoRepositorio;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 import java.awt.*;
 import java.awt.event.*;
 
 public class ListEstados extends JFrame {
+    @Getter
     private JPanel pnlMain;
     private JTable tblEstados;
     private JButton btnEditar;
@@ -20,43 +21,37 @@ public class ListEstados extends JFrame {
         return new JPanel();
     }
 
-    private JPanel pnlTable;
-    private String[] colunas = {"ID","Estado"};
 
-    public JPanel getPnlMain() {
-        return pnlMain;
-    }
+
     public ListEstados(){
+        pnlMain = new JPanel();
+        final String[] colunas = {"ID","Estado"};
+        setContentPane(pnlMain);
+        setVisible(true);
+        setTitle("Listagem de Estados");
+        setSize(600, 700);
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
         EstadoRepositorio estadoRepositorio = new EstadoRepositorio();
         Object[][] estados = estadoRepositorio.listarTodos();
-        GridLayout layoutMain = new GridLayout(2,1);
-        GridLayout layoutBotoes = new GridLayout(1,2);
-        GridLayout layoutTable = new GridLayout(1,1);
-        //pnlMain = new JPanel(layoutMain);
-        pnlBotoes = new JPanel(layoutBotoes);
-        pnlTable = new JPanel(layoutTable);
 
-        DefaultTableModel defaultTableModel = new DefaultTableModel(estados,colunas);
-        tblEstados.setModel(defaultTableModel);
 
-        add(pnlTable);
-        add(pnlBotoes);
-        setContentPane(pnlMain);
+        DefaultTableModel model = new DefaultTableModel(estados,colunas);
+        tblEstados.setModel(model);
 
-        setVisible(true);
-        setLayout(layoutMain);
+        GridLayout layout = new GridLayout(2,1);
+        setLayout(layout);
+        pnlMain.add(tblEstados);
+        pnlMain.add(pnlBotoes);
+//        pnlMain.add(btnEditar);
+
 
         btnEditar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int selectedRow = tblEstados.getSelectedRow();
                 CadEstados cadEstados = new CadEstados(estados[selectedRow][0].toString(),estados[selectedRow][1].toString());
-                cadEstados.setVisible(true);
-                cadEstados.setContentPane(cadEstados.getPnlMain());
-                cadEstados.setTitle("Cadastro de Estados");
-                cadEstados.setSize(600, 400);
-                cadEstados.setLocationRelativeTo(null);
-                cadEstados.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             }
         });
         btnEditar.addComponentListener(new ComponentAdapter() {

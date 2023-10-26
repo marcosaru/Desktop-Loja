@@ -1,0 +1,62 @@
+JFDML JFormDesigner: "8.2.0.0.331" Java: "17.0.8.1" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class net.miginfocom.swing.MigLayout ) {
+			"$layoutConstraints": "hidemode 3"
+			"$columnConstraints": "[fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill]"
+			"$rowConstraints": "[][][][][][][][][][][][]"
+		} ) {
+			name: "this"
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class net.miginfocom.swing.MigLayout ) {
+				"$layoutConstraints": "hidemode 3"
+				"$columnConstraints": "[fill][fill]"
+				"$rowConstraints": "[19,top]"
+			} ) {
+				name: "pnlMenu"
+				add( new FormContainer( "javax.swing.JMenuBar", new FormLayoutManager( class javax.swing.JMenuBar ) ) {
+					name: "menuBar1"
+					add( new FormContainer( "javax.swing.JMenu", new FormLayoutManager( class javax.swing.JMenu ) ) {
+						name: "mEstado"
+						"text": "Estado"
+						add( new FormComponent( "javax.swing.JMenuItem" ) {
+							name: "subMListarEstado"
+							"text": "Listar"
+							addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "subMListarEstadoMouseClicked", true ) )
+							addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "subMListarEstado", true ) )
+						} )
+					} )
+					add( new FormContainer( "javax.swing.JMenu", new FormLayoutManager( class javax.swing.JMenu ) ) {
+						name: "mMunicipio"
+						"text": "Municipio"
+						add( new FormComponent( "javax.swing.JMenuItem" ) {
+							name: "subMListarMunicipio"
+							"text": "Listar"
+						} )
+						add( new FormComponent( "javax.swing.JMenuItem" ) {
+							name: "subMCadastrar"
+							"text": "Cadastrar"
+						} )
+					} )
+				}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+					"value": "cell 0 0 2 1,aligny top,growy 0"
+				} )
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 0 0 26 1"
+			} )
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class net.miginfocom.swing.MigLayout ) {
+				"$layoutConstraints": "hidemode 3"
+				"$columnConstraints": "[fill][fill]"
+				"$rowConstraints": "[][][]"
+			} ) {
+				name: "pnlPrincipal"
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 0 1 26 11"
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 650, 360 )
+		} )
+	}
+}

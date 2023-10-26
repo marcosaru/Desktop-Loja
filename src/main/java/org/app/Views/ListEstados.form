@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="org.app.Views.ListEstados">
   <grid id="27dc6" binding="pnlMain" layout-manager="FormLayout">
-    <rowspec value="center:d:grow"/>
+    <rowspec value="center:max(d;4px):noGrow"/>
     <rowspec value="top:4dlu:noGrow"/>
     <rowspec value="center:max(d;4px):noGrow"/>
     <colspec value="fill:d:grow"/>
@@ -13,31 +13,10 @@
     </properties>
     <border type="none"/>
     <children>
-      <grid id="8a18c" binding="pnlTable" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="true" hgap="-1" vgap="-1">
-        <margin top="0" left="0" bottom="0" right="0"/>
-        <constraints>
-          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-          <forms/>
-        </constraints>
-        <properties/>
-        <border type="none"/>
-        <children>
-          <component id="6661b" class="javax.swing.JTable" binding="tblEstados">
-            <constraints>
-              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                <preferred-size width="150" height="50"/>
-              </grid>
-            </constraints>
-            <properties>
-              <autoResizeMode value="0"/>
-            </properties>
-          </component>
-        </children>
-      </grid>
       <grid id="59da8" binding="pnlBotoes" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="100" vgap="150">
         <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
-          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
           <forms defaultalign-horz="false" defaultalign-vert="false"/>
         </constraints>
         <properties>
@@ -49,7 +28,10 @@
         <children>
           <component id="dcaf0" class="javax.swing.JButton" binding="btnEditar">
             <constraints>
-              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="10" fill="0" indent="0" use-parent-layout="false">
+                <preferred-size width="100" height="40"/>
+                <maximum-size width="100" height="40"/>
+              </grid>
             </constraints>
             <properties>
               <text value="Editar"/>
@@ -57,7 +39,7 @@
           </component>
           <component id="d9f8" class="javax.swing.JButton" binding="btnCancelar">
             <constraints>
-              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="1" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="1" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <horizontalAlignment value="0"/>
@@ -66,6 +48,17 @@
           </component>
         </children>
       </grid>
+      <component id="77105" class="javax.swing.JTable" binding="tblEstados">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="50"/>
+          </grid>
+          <forms defaultalign-horz="false" defaultalign-vert="false"/>
+        </constraints>
+        <properties>
+          <autoResizeMode value="0"/>
+        </properties>
+      </component>
     </children>
   </grid>
 </form>
