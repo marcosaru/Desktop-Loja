@@ -15,6 +15,8 @@ import org.app.Views.Cad.CadMunicipio;
 import org.app.repository.EstadoRepositorio;
 import org.app.repository.MunicipioRepositorio;
 
+import static javax.swing.JTable.AUTO_RESIZE_OFF;
+
 /**
  * @author marcos
  */
@@ -39,6 +41,12 @@ public class ListMunicipio extends JFrame {
         };
         tblMunicipios.setModel(model);
         tblMunicipios.getTableHeader().setResizingAllowed(false);
+        tblMunicipios.getTableHeader().setReorderingAllowed(false);
+        tblMunicipios.setAutoResizeMode(AUTO_RESIZE_OFF);
+        tblMunicipios.getColumnModel().getColumn(0).setPreferredWidth(30);
+        tblMunicipios.getColumnModel().getColumn(1).setPreferredWidth(190);
+        tblMunicipios.getColumnModel().getColumn(2).setPreferredWidth(30);
+        tblMunicipios.getColumnModel().getColumn(3).setPreferredWidth(190);
     }
 
     private void thisKeyPressed(KeyEvent e) {

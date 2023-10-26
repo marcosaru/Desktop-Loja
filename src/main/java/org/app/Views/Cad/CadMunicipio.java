@@ -5,8 +5,17 @@
 package org.app.Views.Cad;
 
 import java.awt.event.*;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import javax.swing.*;
+
+import com.google.gson.Gson;
 import net.miginfocom.swing.*;
+import org.app.config.Configuracoes;
+import org.app.dominio.Estado;
+import org.app.repository.EstadoRepositorio;
 
 /**
  * @author marcos
@@ -30,7 +39,39 @@ public class CadMunicipio extends JFrame {
     }
 
     private void btnConfirma(ActionEvent e) {
-        // TODO add your code here
+        if (edtEstado.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null,"Favor informar o nome do Estado!","Nome vazio",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if(edtMunicipio.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null,"Favor informar o nome do Municipio!","Nome vazio",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        EstadoRepositorio estadoRepositorio = new EstadoRepositorio();
+        Estado estadoEncontrado = estadoRepositorio.encontrar(edtEstado.getText());
+        if (estadoEncontrado != null){
+            Gson gson = new Gson();
+            String json = "{\"nome\":\""+edtMunicipio.getText()+"\",\"estado\":"+gson.toJson(estadoEncontrado)+"}";
+            HttpClient httpClient = HttpClient.newHttpClient();
+            HttpRequest httpRequest = HttpRequest.newBuilder()
+                    .uri(URI.create(Configuracoes.LOCALHOST + "/cadMunicipio"))
+                    .header("Content-Type", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(json))
+                    .build();
+
+            try{
+                HttpResponse<?> response = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
+                if(response.statusCode() == 200)
+                    JOptionPane.showMessageDialog(null,"Cadastrado com sucesso.","Sucesso",JOptionPane.INFORMATION_MESSAGE);
+            }catch (Exception exception){
+                exception.printStackTrace();
+            }
+
+        }
+        else
+            JOptionPane.showMessageDialog(null,"Não foi encontrado um estado com este nome, \nVerifique se digitou corretamente.","Erro ao informar Estado!",JOptionPane.ERROR_MESSAGE);
+
+
     }
 
     private void thisKeyPressed(KeyEvent e) {
@@ -50,7 +91,7 @@ public class CadMunicipio extends JFrame {
         label2 = new JLabel();
         edtEstado = new JTextField();
         label3 = new JLabel();
-        edtEstado2 = new JTextField();
+        edtMunicipio = new JTextField();
         btnCancelar = new JButton();
         btnConfirma = new JButton();
 
@@ -114,7 +155,7 @@ public class CadMunicipio extends JFrame {
         label3.setFont(label3.getFont().deriveFont(label3.getFont().getSize() + 2f));
         label3.setHorizontalAlignment(SwingConstants.RIGHT);
         contentPane.add(label3, "cell 1 3");
-        contentPane.add(edtEstado2, "cell 3 3 4 1");
+        contentPane.add(edtMunicipio, "cell 3 3 4 1");
 
         //---- btnCancelar ----
         btnCancelar.setText("Cancelar");
@@ -137,7 +178,7 @@ public class CadMunicipio extends JFrame {
     private JLabel label2;
     private JTextField edtEstado;
     private JLabel label3;
-    private JTextField edtEstado2;
+    private JTextField edtMunicipio;
     private JButton btnCancelar;
     private JButton btnConfirma;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on

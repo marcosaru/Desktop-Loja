@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +17,15 @@ private String nome;
     public Estado(long id, String nome) {
         this.id = id;
         this.nome = nome;
+    }
+
+    public Estado(HttpResponse<String> response) {
+        String json = response.body();
+
+        Gson gson = new Gson();
+        Estado estado = gson.fromJson(json, Estado.class);
+        this.nome = estado.getNome();
+        this.id = estado.getId();
     }
 
     @Override

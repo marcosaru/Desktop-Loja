@@ -43,4 +43,24 @@ public class EstadoRepositorio implements Serializable {
         }
         return estados;
     }
+
+    public Estado encontrar(String text) {
+        HttpClient httpClient= HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(Configuracoes.LOCALHOST + "/estado/nome="+text))
+                .GET()
+                .build();
+
+        try{
+            HttpResponse<String> response = httpClient.send(request,HttpResponse.BodyHandlers.ofString());
+            if (response.statusCode() == 200){
+                Estado estado = new Estado(response);
+                return estado;
+            }
+        }catch (Exception exception){
+            exception.printStackTrace();
+
+        }
+        return null;
+    }
 }
