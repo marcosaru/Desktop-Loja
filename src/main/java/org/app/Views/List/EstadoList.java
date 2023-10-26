@@ -5,15 +5,14 @@
 package org.app.Views.List;
 
 import java.awt.event.*;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.function.Predicate;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
+import lombok.Getter;
+import lombok.Setter;
 import net.miginfocom.swing.*;
 import org.app.Views.Cad.CadEstado;
-import org.app.Views.CadEstados;
+import org.app.dominio.Estado;
 import org.app.repository.EstadoRepositorio;
 
 /**
@@ -22,7 +21,10 @@ import org.app.repository.EstadoRepositorio;
 public class EstadoList extends JFrame {
     private String[] colunas = {"ID","Estado"};
     private Object[][] estados;
-    private long idMax;
+    @Getter
+    @Setter
+    private Estado selectedEstado;
+    public boolean selecionado;
     public EstadoList() {
         initComponents();
         setVisible(true);
@@ -31,7 +33,13 @@ public class EstadoList extends JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         EstadoRepositorio estadoRepositorio = new EstadoRepositorio();
         estados = estadoRepositorio.listarTodos();
-        DefaultTableModel model = new DefaultTableModel(estados,colunas);
+
+        DefaultTableModel model = new DefaultTableModel(estados,colunas){
+            @Override
+            public boolean isCellEditable(final int row, final int column) {
+                return false;
+            }
+        };
         tblEstados.setModel(model);
     }
 
@@ -55,8 +63,22 @@ public class EstadoList extends JFrame {
     private void btnEditar(ActionEvent e) {
         // TODO add your code here
         int selectedRow = tblEstados.getSelectedRow();
-
         CadEstado cadEstado = new CadEstado(estados[selectedRow][0].toString(),estados[selectedRow][1].toString());
+    }
+
+    private void thisWindowActivated(WindowEvent e) {
+        EstadoRepositorio estadoRepositorio = new EstadoRepositorio();
+        estados = estadoRepositorio.listarTodos();
+        DefaultTableModel model = new DefaultTableModel(estados,colunas);
+        tblEstados.setModel(model);
+    }
+    private void tblEstadosMouseClicked(MouseEvent e) {
+        if (e.getClickCount() >= 2 && e.getButton() == 1){
+            int rowSelection = tblEstados.getSelectedRow();
+            selectedEstado = new Estado((Long) estados[rowSelection][0], (String) estados[rowSelection][1]);
+            setVisible(false);
+            selecionado = true;
+        }
     }
 
     private void initComponents() {
@@ -76,6 +98,12 @@ public class EstadoList extends JFrame {
             @Override
             public void keyPressed(KeyEvent e) {
                 thisKeyPressed(e);
+            }
+        });
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowActivated(WindowEvent e) {
+                thisWindowActivated(e);
             }
         });
         var contentPane = getContentPane();
@@ -106,6 +134,17 @@ public class EstadoList extends JFrame {
 
         //======== scrollPane1 ========
         {
+
+            //---- tblEstados ----
+            tblEstados.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+            tblEstados.setCellSelectionEnabled(true);
+            tblEstados.setToolTipText("Para editar utilize o bot\u00e3o de edi\u00e7\u00e3o.");
+            tblEstados.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    tblEstadosMouseClicked(e);
+                }
+            });
             scrollPane1.setViewportView(tblEstados);
         }
         contentPane.add(scrollPane1, "cell 1 2 3 4");

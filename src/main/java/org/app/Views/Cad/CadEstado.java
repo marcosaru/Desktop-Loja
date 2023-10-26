@@ -6,6 +6,7 @@ package org.app.Views.Cad;
 
 import com.google.gson.Gson;
 import net.miginfocom.swing.MigLayout;
+import org.app.Views.List.EstadoList;
 import org.app.config.Configuracoes;
 import org.app.dominio.Estado;
 
@@ -21,6 +22,7 @@ import java.net.http.HttpResponse;
  * @author marcos
  */
 public class CadEstado extends JFrame {
+    private Estado estado;
     public CadEstado() {
         this("","");
     }
@@ -95,6 +97,16 @@ public class CadEstado extends JFrame {
 
     }
 
+    private void button1(ActionEvent e) {
+        try{
+            EstadoList estadoList = new EstadoList();
+            dispose();
+
+        }catch (Exception exception) {
+            System.out.println(exception);
+        }
+    }
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
         // Generated using JFormDesigner Evaluation license - MARCOS GONCALVES TEIXEIRA
@@ -102,6 +114,7 @@ public class CadEstado extends JFrame {
         edtID = new JTextField();
         label2 = new JLabel();
         edtEstado = new JTextField();
+        button1 = new JButton();
         btnCancelar = new JButton();
         btnConfirma = new JButton();
 
@@ -144,6 +157,11 @@ public class CadEstado extends JFrame {
         contentPane.add(label2, "cell 1 3");
         contentPane.add(edtEstado, "cell 2 3 5 1");
 
+        //---- button1 ----
+        button1.setText("O");
+        button1.addActionListener(e -> button1(e));
+        contentPane.add(button1, "cell 1 5");
+
         //---- btnCancelar ----
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(e -> btnCancelar(e));
@@ -164,6 +182,7 @@ public class CadEstado extends JFrame {
     private JTextField edtID;
     private JLabel label2;
     private JTextField edtEstado;
+    private JButton button1;
     private JButton btnCancelar;
     private JButton btnConfirma;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on

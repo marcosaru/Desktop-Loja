@@ -12,6 +12,7 @@ new FormModel {
 			"resizable": false
 			"title": "Estados Cadastrados"
 			addEvent( new FormEvent( "java.awt.event.KeyListener", "keyPressed", "thisKeyPressed", true ) )
+			addEvent( new FormEvent( "java.awt.event.WindowListener", "windowActivated", "thisWindowActivated", true ) )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label1"
 				"text": "Listagem de Estados"
@@ -22,6 +23,10 @@ new FormModel {
 				name: "scrollPane1"
 				add( new FormComponent( "javax.swing.JTable" ) {
 					name: "tblEstados"
+					"selectionMode": 0
+					"cellSelectionEnabled": true
+					"toolTipText": "Para editar utilize o botão de edição."
+					addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "tblEstadosMouseClicked", true ) )
 				} )
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 				"value": "cell 1 2 3 4"

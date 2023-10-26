@@ -26,6 +26,12 @@ new FormModel {
 							addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "subMListarEstadoMouseClicked", true ) )
 							addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "subMListarEstado", true ) )
 						} )
+						add( new FormComponent( "javax.swing.JMenuItem" ) {
+							name: "subMCadEstado"
+							"text": "Cadastrar"
+							addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "subMCadEstadoMouseClicked", true ) )
+							addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "subMCadEstado", true ) )
+						} )
 					} )
 					add( new FormContainer( "javax.swing.JMenu", new FormLayoutManager( class javax.swing.JMenu ) ) {
 						name: "mMunicipio"
