@@ -13,6 +13,8 @@ new FormModel {
 			"title": "Municipios Cadastrados"
 			addEvent( new FormEvent( "java.awt.event.KeyListener", "keyPressed", "thisKeyPressed", true ) )
 			addEvent( new FormEvent( "java.awt.event.WindowListener", "windowActivated", "thisWindowActivated", true ) )
+			addEvent( new FormEvent( "java.awt.event.KeyListener", "keyReleased", "thisKeyReleased", true ) )
+			addEvent( new FormEvent( "java.awt.event.KeyListener", "keyTyped", "thisKeyTyped", true ) )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label1"
 				"text": "Listagem de Municipios"
@@ -33,7 +35,7 @@ new FormModel {
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "btnIncluir"
-				"text": "Incluir"
+				"text": "F1- Incluir"
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btnIncluir", true ) )
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 				"value": "cell 5 2"
@@ -51,6 +53,16 @@ new FormModel {
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btnFechar", true ) )
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 				"value": "cell 5 4"
+			} )
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class net.miginfocom.swing.MigLayout ) {
+				"$layoutConstraints": "hidemode 3"
+				"$columnConstraints": "[6,fill]"
+				"$rowConstraints": "[3]"
+			} ) {
+				name: "pnl"
+				addEvent( new FormEvent( "java.awt.event.KeyListener", "keyPressed", "pnlKeyPressed", true ) )
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 5 5"
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"size": new java.awt.Dimension( 625, 535 )

@@ -47,9 +47,11 @@ public class ListMunicipio extends JFrame {
         tblMunicipios.getColumnModel().getColumn(1).setPreferredWidth(190);
         tblMunicipios.getColumnModel().getColumn(2).setPreferredWidth(30);
         tblMunicipios.getColumnModel().getColumn(3).setPreferredWidth(190);
+        pnl.requestFocus();
     }
 
     private void thisKeyPressed(KeyEvent e) {
+        System.out.println(e.getKeyCode());
         if(e.getKeyCode() == 27)
             btnFechar(null);
 
@@ -76,6 +78,22 @@ public class ListMunicipio extends JFrame {
             dispose();
     }
 
+    private void thisKeyReleased(KeyEvent e) {
+        System.out.println(e.getKeyCode());
+    }
+
+    private void thisKeyTyped(KeyEvent e) {
+        System.out.println(e.getKeyCode());
+    }
+
+    private void pnlKeyPressed(KeyEvent e) {
+        System.out.println(e.getKeyCode());
+        if (e.getKeyCode() == 112)
+            btnIncluir(null);
+        if( e.getKeyCode() == 27)
+            btnFechar(null);
+    }
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
         // Generated using JFormDesigner Evaluation license - MARCOS GONCALVES TEIXEIRA
@@ -85,6 +103,7 @@ public class ListMunicipio extends JFrame {
         btnIncluir = new JButton();
         btnEditar = new JButton();
         btnFechar = new JButton();
+        pnl = new JPanel();
 
         //======== this ========
         setResizable(false);
@@ -93,6 +112,14 @@ public class ListMunicipio extends JFrame {
             @Override
             public void keyPressed(KeyEvent e) {
                 thisKeyPressed(e);
+            }
+            @Override
+            public void keyReleased(KeyEvent e) {
+                thisKeyReleased(e);
+            }
+            @Override
+            public void keyTyped(KeyEvent e) {
+                thisKeyTyped(e);
             }
         });
         addWindowListener(new WindowAdapter() {
@@ -145,7 +172,7 @@ public class ListMunicipio extends JFrame {
         contentPane.add(scrollPane1, "cell 1 2 3 4");
 
         //---- btnIncluir ----
-        btnIncluir.setText("Incluir");
+        btnIncluir.setText("F1- Incluir");
         btnIncluir.addActionListener(e -> btnIncluir(e));
         contentPane.add(btnIncluir, "cell 5 2");
 
@@ -158,6 +185,30 @@ public class ListMunicipio extends JFrame {
         btnFechar.setText("Fechar");
         btnFechar.addActionListener(e -> btnFechar(e));
         contentPane.add(btnFechar, "cell 5 4");
+
+        //======== pnl ========
+        {
+            pnl.addKeyListener(new KeyAdapter() {
+                @Override
+                public void keyPressed(KeyEvent e) {
+                    pnlKeyPressed(e);
+                }
+            });
+            pnl.setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax.
+            swing.border.EmptyBorder(0,0,0,0), "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn",javax.swing.border
+            .TitledBorder.CENTER,javax.swing.border.TitledBorder.BOTTOM,new java.awt.Font("Dia\u006cog"
+            ,java.awt.Font.BOLD,12),java.awt.Color.red),pnl. getBorder
+            ()));pnl. addPropertyChangeListener(new java.beans.PropertyChangeListener(){@Override public void propertyChange(java
+            .beans.PropertyChangeEvent e){if("\u0062ord\u0065r".equals(e.getPropertyName()))throw new RuntimeException
+            ();}});
+            pnl.setLayout(new MigLayout(
+                "hidemode 3",
+                // columns
+                "[6,fill]",
+                // rows
+                "[3]"));
+        }
+        contentPane.add(pnl, "cell 5 5");
         pack();
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents  @formatter:on
@@ -171,5 +222,6 @@ public class ListMunicipio extends JFrame {
     private JButton btnIncluir;
     private JButton btnEditar;
     private JButton btnFechar;
+    private JPanel pnl;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }

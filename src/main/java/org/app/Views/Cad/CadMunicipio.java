@@ -51,6 +51,10 @@ public class CadMunicipio extends JFrame {
             JOptionPane.showMessageDialog(null,"Favor informar o nome do Municipio!","Nome vazio",JOptionPane.ERROR_MESSAGE);
             return;
         }
+        if(!chkEstado.isSelected()){
+            JOptionPane.showMessageDialog(null,"é Obrigatório informar o nome do Estado!");
+            return;
+        }
         EstadoRepositorio estadoRepositorio = new EstadoRepositorio();
         Estado estadoEncontrado = estadoRepositorio.encontrar(edtEstado.getText());
         if (estadoEncontrado != null){
@@ -79,7 +83,8 @@ public class CadMunicipio extends JFrame {
     }
 
     private void thisKeyPressed(KeyEvent e) {
-        System.out.println(e.getKeyCode());
+        if(e.getKeyCode() == 112)
+            btnConfirma(null);
     }
 
     private void edtEstadoKeyPressed(KeyEvent e) {
@@ -89,6 +94,7 @@ public class CadMunicipio extends JFrame {
                 edtID.setText(String.valueOf(encontrar.getId()));
                 chkEstado.setBackground(Color.green);
                 chkEstado.setSelected(true);
+                edtEstado.setEnabled(false);
                 edtMunicipio.requestFocus();
             }
             else{
