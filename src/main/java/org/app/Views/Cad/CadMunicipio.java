@@ -4,6 +4,7 @@
 
 package org.app.Views.Cad;
 
+import java.awt.*;
 import java.awt.event.*;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -21,9 +22,12 @@ import org.app.repository.EstadoRepositorio;
  * @author marcos
  */
 public class CadMunicipio extends JFrame {
+    final private EstadoRepositorio estadoRepositorio;
     public CadMunicipio() {
         initComponents();
         setVisible(true);
+        chkEstado.setBackground(Color.red);
+        estadoRepositorio = new EstadoRepositorio();
         setSize(490, 205);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -79,6 +83,19 @@ public class CadMunicipio extends JFrame {
     }
 
     private void edtEstadoKeyPressed(KeyEvent e) {
+        if (e.getKeyCode() == 10 && !edtEstado.getText().isEmpty()){
+            Estado encontrar = estadoRepositorio.encontrar(edtEstado.getText());
+            if (encontrar != null){
+                edtID.setText(String.valueOf(encontrar.getId()));
+                chkEstado.setBackground(Color.green);
+                chkEstado.setSelected(true);
+                edtMunicipio.requestFocus();
+            }
+            else{
+                chkEstado.setSelected(false);
+                chkEstado.setBackground(Color.red);
+            }
+        }
         if(e.getKeyCode() == 27)
             btnCancelar(null);
     }
@@ -90,6 +107,7 @@ public class CadMunicipio extends JFrame {
         edtID = new JTextField();
         label2 = new JLabel();
         edtEstado = new JTextField();
+        chkEstado = new JCheckBox();
         label3 = new JLabel();
         edtMunicipio = new JTextField();
         btnCancelar = new JButton();
@@ -114,7 +132,7 @@ public class CadMunicipio extends JFrame {
             "[fill]" +
             "[43,fill]" +
             "[130,fill]" +
-            "[69,fill]",
+            "[20,fill]",
             // rows
             "[]" +
             "[]" +
@@ -150,6 +168,11 @@ public class CadMunicipio extends JFrame {
         });
         contentPane.add(edtEstado, "cell 3 1 4 1");
 
+        //---- chkEstado ----
+        chkEstado.setEnabled(false);
+        chkEstado.setBackground(new Color(0xcc0000));
+        contentPane.add(chkEstado, "cell 7 1");
+
         //---- label3 ----
         label3.setText("Municipio");
         label3.setFont(label3.getFont().deriveFont(label3.getFont().getSize() + 2f));
@@ -177,6 +200,7 @@ public class CadMunicipio extends JFrame {
     private JTextField edtID;
     private JLabel label2;
     private JTextField edtEstado;
+    private JCheckBox chkEstado;
     private JLabel label3;
     private JTextField edtMunicipio;
     private JButton btnCancelar;
