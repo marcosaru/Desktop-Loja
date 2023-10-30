@@ -1,0 +1,50 @@
+JFDML JFormDesigner: "8.2.0.0.331" Java: "17.0.8.1" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class net.miginfocom.swing.MigLayout ) {
+			"$layoutConstraints": "hidemode 3"
+			"$columnConstraints": "[fill][fill][688,fill][34,fill][fill][fill][fill]"
+			"$rowConstraints": "[][][][][][][][][]"
+		} ) {
+			name: "this"
+			"resizable": false
+			"title": "Clientes Cadastrados"
+			addEvent( new FormEvent( "java.awt.event.KeyListener", "keyPressed", "thisKeyPressed", true ) )
+			addEvent( new FormEvent( "java.awt.event.WindowListener", "windowActivated", "thisWindowActivated", true ) )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "btnIncluir"
+				"text": "Incluir"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btnIncluir", true ) )
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 5 2"
+			} )
+			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+				name: "scrollPane2"
+				add( new FormComponent( "javax.swing.JTable" ) {
+					name: "tbl"
+				} )
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 2 3"
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "btnEditar"
+				"text": "Editar"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btnEditar", true ) )
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 5 3"
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "btnFechar"
+				"text": "Fechar"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btnFechar", true ) )
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 5 4"
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"size": new java.awt.Dimension( 900, 535 )
+			"location": new java.awt.Point( 0, 0 )
+		} )
+	}
+}

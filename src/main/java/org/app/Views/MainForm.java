@@ -9,6 +9,7 @@ import javax.swing.*;
 import net.miginfocom.swing.*;
 import org.app.Views.Cad.CadEstado;
 import org.app.Views.List.EstadoList;
+import org.app.Views.List.ListCliente;
 import org.app.Views.List.ListMunicipio;
 
 import static java.awt.event.KeyEvent.VK_ENTER;
@@ -47,6 +48,10 @@ public class MainForm extends JFrame {
         ListMunicipio listMunicipio = new ListMunicipio();
     }
 
+    private void menuItem1(ActionEvent e) {
+        ListCliente listCliente = new ListCliente();
+    }
+
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
@@ -59,6 +64,9 @@ public class MainForm extends JFrame {
         mMunicipio = new JMenu();
         subMListarMunicipio = new JMenuItem();
         subMCadastrar = new JMenuItem();
+        mCliente = new JMenu();
+        menuItem2 = new JMenuItem();
+        menuItem1 = new JMenuItem();
         pnlPrincipal = new JPanel();
 
         //======== this ========
@@ -108,11 +116,13 @@ public class MainForm extends JFrame {
 
         //======== pnlMenu ========
         {
-            pnlMenu.setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax.swing.border.EmptyBorder(0
-            ,0,0,0), "JF\u006frmDes\u0069gner \u0045valua\u0074ion",javax.swing.border.TitledBorder.CENTER,javax.swing.border.TitledBorder.BOTTOM
-            ,new java.awt.Font("D\u0069alog",java.awt.Font.BOLD,12),java.awt.Color.red),
-            pnlMenu. getBorder()));pnlMenu. addPropertyChangeListener(new java.beans.PropertyChangeListener(){@Override public void propertyChange(java.beans.PropertyChangeEvent e
-            ){if("\u0062order".equals(e.getPropertyName()))throw new RuntimeException();}});
+            pnlMenu.setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new javax . swing
+            . border .EmptyBorder ( 0, 0 ,0 , 0) ,  "JFor\u006dDesi\u0067ner \u0045valu\u0061tion" , javax. swing .border . TitledBorder
+            . CENTER ,javax . swing. border .TitledBorder . BOTTOM, new java. awt .Font ( "Dia\u006cog", java .
+            awt . Font. BOLD ,12 ) ,java . awt. Color .red ) ,pnlMenu. getBorder () ) )
+            ; pnlMenu. addPropertyChangeListener( new java. beans .PropertyChangeListener ( ){ @Override public void propertyChange (java . beans. PropertyChangeEvent e
+            ) { if( "bord\u0065r" .equals ( e. getPropertyName () ) )throw new RuntimeException( ) ;} } )
+            ;
             pnlMenu.setLayout(new MigLayout(
                 "hidemode 3",
                 // columns
@@ -166,6 +176,21 @@ public class MainForm extends JFrame {
                     mMunicipio.add(subMCadastrar);
                 }
                 menuBar1.add(mMunicipio);
+
+                //======== mCliente ========
+                {
+                    mCliente.setText("Clientes");
+
+                    //---- menuItem2 ----
+                    menuItem2.setText("Cadastrar");
+                    mCliente.add(menuItem2);
+
+                    //---- menuItem1 ----
+                    menuItem1.setText("Listar");
+                    menuItem1.addActionListener(e -> menuItem1(e));
+                    mCliente.add(menuItem1);
+                }
+                menuBar1.add(mCliente);
             }
             pnlMenu.add(menuBar1, "cell 0 0 2 1,aligny top,growy 0");
         }
@@ -199,6 +224,9 @@ public class MainForm extends JFrame {
     private JMenu mMunicipio;
     private JMenuItem subMListarMunicipio;
     private JMenuItem subMCadastrar;
+    private JMenu mCliente;
+    private JMenuItem menuItem2;
+    private JMenuItem menuItem1;
     private JPanel pnlPrincipal;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }
