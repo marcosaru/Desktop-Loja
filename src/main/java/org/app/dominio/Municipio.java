@@ -26,6 +26,7 @@ public class Municipio {
         Municipio municipio = gson.fromJson(json, Municipio.class);
         this.nome = municipio.getNome();
         this.id = municipio.getId();
+        this.estado = municipio.getEstado();
     }
 
     public Municipio(String id, String string) {

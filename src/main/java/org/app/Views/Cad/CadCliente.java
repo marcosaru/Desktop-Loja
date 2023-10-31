@@ -8,10 +8,14 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.Optional;
 import javax.swing.*;
+
+import com.jformdesigner.C;
 import net.miginfocom.swing.*;
 import org.app.Views.List.ListMunicipio;
 import org.app.config.Configuracoes;
+import org.app.dominio.Cliente;
 import org.app.dominio.Municipio;
+import org.app.repository.ClienteRepositorio;
 import org.app.repository.MunicipioRepositorio;
 
 /**
@@ -24,7 +28,6 @@ public class CadCliente extends JFrame {
         setSize(550, 290);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
     }
 
     private void textField8KeyPressed(KeyEvent e) {
@@ -40,6 +43,8 @@ public class CadCliente extends JFrame {
                if (municipio.isPresent()) {
                     EdtNomeMunicipio.setText(municipio.get().getNome());
                     chkMunicipio.setVisible(true);
+                    chkMunicipio.setSelected(true);
+                    edtCodigoMunicipio.setEnabled(false);
                }else {
                    JOptionPane.showMessageDialog(null, "Municipio não encontrado, por favor insira o código numérico do municipio!", "Erro ao consultar Municipio", JOptionPane.ERROR_MESSAGE);
                     chkMunicipio.setVisible(false);
@@ -54,6 +59,7 @@ public class CadCliente extends JFrame {
             EdtNomeMunicipio.setText(ListMunicipio.getMunicipio().getNome());
             edtCodigoMunicipio.setText(String.valueOf(ListMunicipio.getMunicipio().getId()));
             chkMunicipio.setVisible(true);
+            edtCodigoMunicipio.setEnabled(false);
         }
     }
 
@@ -63,6 +69,55 @@ public class CadCliente extends JFrame {
             edtCodigoMunicipio.setText(String.valueOf(ListMunicipio.getMunicipio().getId()));
             chkMunicipio.setVisible(true);
         }
+    }
+
+    private void chkMunicipio(ActionEvent e) {
+        if (!chkMunicipio.isSelected()) {
+            EdtNomeMunicipio.setText("");
+            edtCodigoMunicipio.setEnabled(true);
+            edtCodigoMunicipio.setText("");
+            chkMunicipio.setVisible(false);
+        }
+    }
+
+    private void btnConfirma(ActionEvent e) {
+        if (!chkMunicipio.isSelected()) {
+            JOptionPane.showMessageDialog(null,"É necessário informar municipio para cadastrar um cliente.","Municipio não informado",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if(edtNome.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null,"Favor informar o nome do cliente!","Nome vazio",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if(edtCpf.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null,"Favor informar o CPF do cliente!","CPF vazio",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if(edtEndereco.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null,"Favor informar o endereço do cliente!","Endereço vazio",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if(edtTelefone.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null,"Favor informar o telefone do cliente!","Telefone vazio",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if(edtEmail.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null,"Favor informar o email do cliente!","Email vazio",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        MunicipioRepositorio municipioRepositorio = new MunicipioRepositorio();
+        ClienteRepositorio clienteRepositorio = new ClienteRepositorio();
+        Cliente cliente = new Cliente();
+        cliente.setNome(edtNome.getText());
+        cliente.setCpf(edtCpf.getText());
+        cliente.setEndereco(edtEndereco.getText());
+        cliente.setTelefone(edtTelefone.getText());
+        cliente.setEmail(edtEmail.getText());
+        if (ListMunicipio.getMunicipio() != null)
+            cliente.setMunicipio(ListMunicipio.getMunicipio());
+        else
+            cliente.setMunicipio(municipioRepositorio.encontrarPorId(Long.parseLong(edtCodigoMunicipio.getText())).get());
+        clienteRepositorio.cadastrar(cliente);
     }
 
     private void initComponents() {
@@ -86,6 +141,8 @@ public class CadCliente extends JFrame {
         chkMunicipio = new JCheckBox();
         btnBuscarMunicipio = new JButton();
         label8 = new JLabel();
+        btnCancelar = new JButton();
+        btnConfirma = new JButton();
 
         //======== this ========
         setTitle("Cadastrar Cliente");
@@ -118,6 +175,8 @@ public class CadCliente extends JFrame {
             "[center]" +
             "[center]" +
             "[center]" +
+            "[]" +
+            "[42]" +
             "[]"));
 
         //---- label1 ----
@@ -202,6 +261,7 @@ public class CadCliente extends JFrame {
         chkMunicipio.setBackground(new Color(0x00cc00));
         chkMunicipio.setSelected(true);
         chkMunicipio.setVisible(false);
+        chkMunicipio.addActionListener(e -> chkMunicipio(e));
         contentPane.add(chkMunicipio, "cell 4 7 5 1");
 
         //---- btnBuscarMunicipio ----
@@ -215,6 +275,21 @@ public class CadCliente extends JFrame {
         //---- label8 ----
         label8.setText("Digite o c\u00f3digo do municipio e pressione \"enter\".");
         contentPane.add(label8, "cell 2 8 7 1");
+
+        //---- btnCancelar ----
+        btnCancelar.setText("Cancelar");
+        btnCancelar.setMaximumSize(new Dimension(90, 22));
+        btnCancelar.setMinimumSize(new Dimension(90, 30));
+        btnCancelar.setHorizontalTextPosition(SwingConstants.CENTER);
+        contentPane.add(btnCancelar, "cell 8 9");
+
+        //---- btnConfirma ----
+        btnConfirma.setText("Confirmar");
+        btnConfirma.setMaximumSize(new Dimension(90, 22));
+        btnConfirma.setMinimumSize(new Dimension(90, 30));
+        btnConfirma.setHorizontalTextPosition(SwingConstants.CENTER);
+        btnConfirma.addActionListener(e -> btnConfirma(e));
+        contentPane.add(btnConfirma, "cell 9 9");
         pack();
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents  @formatter:on
@@ -240,5 +315,7 @@ public class CadCliente extends JFrame {
     private JCheckBox chkMunicipio;
     private JButton btnBuscarMunicipio;
     private JLabel label8;
+    private JButton btnCancelar;
+    private JButton btnConfirma;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }

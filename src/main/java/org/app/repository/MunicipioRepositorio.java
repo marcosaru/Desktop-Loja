@@ -1,8 +1,12 @@
 package org.app.repository;
 
+import com.google.gson.Gson;
 import org.app.config.Configuracoes;
+import org.app.dominio.Cliente;
 import org.app.dominio.Municipio;
 
+import javax.swing.*;
+import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -49,4 +53,6 @@ public class MunicipioRepositorio {
         }
         return Optional.empty();
     }
+
+
 }

@@ -61,4 +61,20 @@ public class Cliente {
                 ", telefone='" + telefone + '\'' +
                 '}';
     }
+
+    public String toJson() {
+        return "{" +
+                "\"nome\":\"" + nome + '\"' +
+                ", \"email\":\"" + email + '\"' +
+                ", \"cpf\":\"" + cpf + '\"' +
+                ", \"endereco\":\"" + endereco + '\"' +
+                ", \"telefone\":\"" + telefone + '\"' +
+                ", \"municipio\":" +"{"+
+                "\"id\":"+municipio.getId() +","+
+                "\"nome\":\""+municipio.getNome()+"\","+
+                "\"estado\":"+"{"+
+                "\"id\":"+municipio.getEstado().getId()+","+
+                "\"nome\":\""+municipio.getEstado().getNome()+"\""+
+                '}'+"}}";
+    }
 }

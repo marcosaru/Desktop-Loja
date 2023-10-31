@@ -6,7 +6,7 @@ new FormModel {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class net.miginfocom.swing.MigLayout ) {
 			"$layoutConstraints": "hidemode 3"
 			"$columnConstraints": "[fill][fill][fill][fill][fill][fill][fill][108,fill][97,fill][90,fill]"
-			"$rowConstraints": "[][center][center][center][center][center][center][center][]"
+			"$rowConstraints": "[][center][center][center][center][center][center][center][][42][]"
 		} ) {
 			name: "this"
 			"title": "Cadastrar Cliente"
@@ -119,14 +119,15 @@ new FormModel {
 				"background": new java.awt.Color( 0, 204, 0, 255 )
 				"selected": true
 				"visible": false
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "chkMunicipio", true ) )
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 				"value": "cell 4 7 5 1"
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "btnBuscarMunicipio"
 				"text": "Busca"
-				"maximumSize": new java.awt.Dimension( 90, 22 )
-				"minimumSize": new java.awt.Dimension( 90, 30 )
+				"maximumSize": &Dimension0 new java.awt.Dimension( 90, 22 )
+				"minimumSize": &Dimension1 new java.awt.Dimension( 90, 30 )
 				"horizontalTextPosition": 0
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btnBuscarMunicipio", true ) )
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
@@ -138,9 +139,28 @@ new FormModel {
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 				"value": "cell 2 8 7 1"
 			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "btnCancelar"
+				"text": "Cancelar"
+				"maximumSize": #Dimension0
+				"minimumSize": #Dimension1
+				"horizontalTextPosition": 0
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 8 9"
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "btnConfirma"
+				"text": "Confirmar"
+				"maximumSize": #Dimension0
+				"minimumSize": #Dimension1
+				"horizontalTextPosition": 0
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btnConfirma", true ) )
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 9 9"
+			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 35, 0 )
-			"size": new java.awt.Dimension( 550, 290 )
+			"size": new java.awt.Dimension( 550, 350 )
 		} )
 	}
 }
