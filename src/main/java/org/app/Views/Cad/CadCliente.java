@@ -30,6 +30,20 @@ public class CadCliente extends JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
+    public CadCliente(Cliente cliente) {
+        this();
+        edtCodigoCliente.setText(String.valueOf(cliente.getId()));
+        edtNome.setText(cliente.getNome());
+        edtCpf.setText(cliente.getCpf());
+        edtEmail.setText(cliente.getEmail());
+        edtEndereco.setText(cliente.getEndereco());
+        edtTelefone.setText(cliente.getTelefone());
+        edtCodigoMunicipio.setText(String.valueOf(cliente.getMunicipio().getId()));
+        EdtNomeMunicipio.setText(cliente.getMunicipio().getNome());
+        chkMunicipio.setVisible(true);
+        chkMunicipio.setSelected(true);
+    }
+
     private void textField8KeyPressed(KeyEvent e) {
         if(e.getKeyCode() == 10 && !edtCodigoMunicipio.getText().equals("")){
             String input = edtCodigoMunicipio.getText();
@@ -124,7 +138,7 @@ public class CadCliente extends JFrame {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
         // Generated using JFormDesigner Evaluation license - MARCOS GONCALVES TEIXEIRA
         label1 = new JLabel();
-        textField1 = new JTextField();
+        edtCodigoCliente = new JTextField();
         label2 = new JLabel();
         edtNome = new JTextField();
         label3 = new JLabel();
@@ -184,10 +198,10 @@ public class CadCliente extends JFrame {
         label1.setHorizontalTextPosition(SwingConstants.RIGHT);
         contentPane.add(label1, "cell 1 1,alignx right,growx 0");
 
-        //---- textField1 ----
-        textField1.setEnabled(false);
-        textField1.setMaximumSize(new Dimension(50, 22));
-        contentPane.add(textField1, "cell 2 1 2 1");
+        //---- edtCodigoCliente ----
+        edtCodigoCliente.setEnabled(false);
+        edtCodigoCliente.setMaximumSize(new Dimension(50, 22));
+        contentPane.add(edtCodigoCliente, "cell 2 1 2 1");
 
         //---- label2 ----
         label2.setText("Nome");
@@ -298,7 +312,7 @@ public class CadCliente extends JFrame {
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables  @formatter:off
     // Generated using JFormDesigner Evaluation license - MARCOS GONCALVES TEIXEIRA
     private JLabel label1;
-    private JTextField textField1;
+    private JTextField edtCodigoCliente;
     private JLabel label2;
     private JTextField edtNome;
     private JLabel label3;

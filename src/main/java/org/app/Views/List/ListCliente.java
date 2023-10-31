@@ -13,6 +13,8 @@ import lombok.Getter;
 import lombok.Setter;
 import net.miginfocom.swing.*;
 import org.app.Views.Cad.CadCliente;
+import org.app.dominio.Cliente;
+import org.app.dominio.Municipio;
 import org.app.repository.ClienteRepositorio;
 import org.app.repository.MunicipioRepositorio;
 
@@ -72,7 +74,18 @@ public class ListCliente extends JFrame {
     }
 
     private void btnEditar(ActionEvent e) {
-        // TODO add your code here
+        Cliente cliente = new Cliente();
+        cliente.setId((long)tbl.getValueAt(tbl.getSelectedRow(),0));
+        cliente.setNome((String)tbl.getValueAt(tbl.getSelectedRow(),1));
+        cliente.setCpf((String)tbl.getValueAt(tbl.getSelectedRow(),2));
+        cliente.setTelefone((String)tbl.getValueAt(tbl.getSelectedRow(),3));
+        cliente.setEndereco((String)tbl.getValueAt(tbl.getSelectedRow(),4));
+        cliente.setEmail((String)tbl.getValueAt(tbl.getSelectedRow(),9));
+        String idMunicipio = tbl.getValueAt(tbl.getSelectedRow(),5).toString();
+        String nomeMunicipio = tbl.getValueAt(tbl.getSelectedRow(),6).toString();
+        cliente.setMunicipio(new Municipio(idMunicipio, nomeMunicipio));
+
+        CadCliente cadCliente = new CadCliente(cliente);
     }
 
     private void btnFechar(ActionEvent e) {

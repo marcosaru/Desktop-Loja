@@ -19,7 +19,7 @@ new FormModel {
 				"value": "cell 1 1,alignx right,growx 0"
 			} )
 			add( new FormComponent( "javax.swing.JTextField" ) {
-				name: "textField1"
+				name: "edtCodigoCliente"
 				"enabled": false
 				"maximumSize": new java.awt.Dimension( 50, 22 )
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
