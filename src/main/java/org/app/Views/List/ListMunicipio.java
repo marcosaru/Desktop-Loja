@@ -12,6 +12,8 @@ import lombok.Getter;
 import lombok.Setter;
 import net.miginfocom.swing.*;
 import org.app.Views.Cad.CadMunicipio;
+import org.app.config.Configuracoes;
+import org.app.dominio.Municipio;
 import org.app.repository.EstadoRepositorio;
 import org.app.repository.MunicipioRepositorio;
 
@@ -24,6 +26,12 @@ public class ListMunicipio extends JFrame {
     @Getter
     @Setter
     private Object[][] municipios = null;
+    @Getter
+    @Setter
+    private static Municipio municipio;
+    @Getter
+    @Setter
+    private int modo;
     private String[] colunas = {"ID Municipio","Municipio","ID Estado","Estado"};
     public ListMunicipio() {
         initComponents();
@@ -50,6 +58,15 @@ public class ListMunicipio extends JFrame {
         pnl.requestFocus();
     }
 
+    public ListMunicipio(int modoBuscar) {
+        this();
+        if(modoBuscar == 1){
+            btnEditar.setVisible(false);
+            btnIncluir.setVisible(false);
+        }
+        setModo(modoBuscar);
+    }
+
     private void thisKeyPressed(KeyEvent e) {
         System.out.println(e.getKeyCode());
         if(e.getKeyCode() == 27)
@@ -62,7 +79,13 @@ public class ListMunicipio extends JFrame {
     }
 
     private void tblEstadosMouseClicked(MouseEvent e) {
-        // TODO add your code here
+        if(e.getClickCount() == 2){
+            if(getModo() == Configuracoes.MODO_BUSCAR){
+                int row = tblMunicipios.getSelectedRow();
+                setMunicipio(new Municipio(tblMunicipios.getValueAt(row,0).toString(),tblMunicipios.getValueAt(row,1).toString()));
+                dispose();
+            }
+        }
     }
 
     private void btnIncluir(ActionEvent e) {

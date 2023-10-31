@@ -7,6 +7,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.Optional;
 
 public class MunicipioRepositorio {
     public Object[][] listar(){
@@ -30,4 +31,24 @@ public class MunicipioRepositorio {
         return null;
     }
 
+    public Optional<Municipio> encontrarPorId(long id) {
+        HttpClient httpClient = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(Configuracoes.LOCALHOST + "/municipio/id="+id))
+                .header("Content-Type", "application/json")
+                .GET()
+                .build();
+
+        try{
+            HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+            if (response.statusCode() == 200){
+                Optional<Municipio> munEncontrado = Optional.of(new Municipio(response));
+                return munEncontrado;
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

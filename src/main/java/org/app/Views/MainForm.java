@@ -7,10 +7,12 @@ package org.app.Views;
 import java.awt.event.*;
 import javax.swing.*;
 import net.miginfocom.swing.*;
+import org.app.Views.Cad.CadCliente;
 import org.app.Views.Cad.CadEstado;
 import org.app.Views.List.EstadoList;
 import org.app.Views.List.ListCliente;
 import org.app.Views.List.ListMunicipio;
+import org.app.config.Configuracoes;
 
 import static java.awt.event.KeyEvent.VK_ENTER;
 
@@ -49,7 +51,11 @@ public class MainForm extends JFrame {
     }
 
     private void menuItem1(ActionEvent e) {
-        ListCliente listCliente = new ListCliente();
+        ListCliente listCliente = new ListCliente(Configuracoes.MODO_LISTA);
+    }
+
+    private void menuItem2(ActionEvent e) {
+        CadCliente cadCliente = new CadCliente();
     }
 
 
@@ -116,13 +122,14 @@ public class MainForm extends JFrame {
 
         //======== pnlMenu ========
         {
-            pnlMenu.setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new javax . swing
-            . border .EmptyBorder ( 0, 0 ,0 , 0) ,  "JFor\u006dDesi\u0067ner \u0045valu\u0061tion" , javax. swing .border . TitledBorder
-            . CENTER ,javax . swing. border .TitledBorder . BOTTOM, new java. awt .Font ( "Dia\u006cog", java .
-            awt . Font. BOLD ,12 ) ,java . awt. Color .red ) ,pnlMenu. getBorder () ) )
-            ; pnlMenu. addPropertyChangeListener( new java. beans .PropertyChangeListener ( ){ @Override public void propertyChange (java . beans. PropertyChangeEvent e
-            ) { if( "bord\u0065r" .equals ( e. getPropertyName () ) )throw new RuntimeException( ) ;} } )
-            ;
+            pnlMenu.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (
+            new javax. swing. border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frmDes\u0069gner \u0045valua\u0074ion"
+            , javax. swing. border. TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM
+            , new java .awt .Font ("D\u0069alog" ,java .awt .Font .BOLD ,12 )
+            , java. awt. Color. red) ,pnlMenu. getBorder( )) ); pnlMenu. addPropertyChangeListener (
+            new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e
+            ) {if ("\u0062order" .equals (e .getPropertyName () )) throw new RuntimeException( )
+            ; }} );
             pnlMenu.setLayout(new MigLayout(
                 "hidemode 3",
                 // columns
@@ -183,6 +190,7 @@ public class MainForm extends JFrame {
 
                     //---- menuItem2 ----
                     menuItem2.setText("Cadastrar");
+                    menuItem2.addActionListener(e -> menuItem2(e));
                     mCliente.add(menuItem2);
 
                     //---- menuItem1 ----

@@ -52,6 +52,7 @@ new FormModel {
 						add( new FormComponent( "javax.swing.JMenuItem" ) {
 							name: "menuItem2"
 							"text": "Cadastrar"
+							addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "menuItem2", true ) )
 						} )
 						add( new FormComponent( "javax.swing.JMenuItem" ) {
 							name: "menuItem1"

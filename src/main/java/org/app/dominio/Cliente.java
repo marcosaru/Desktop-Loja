@@ -36,13 +36,13 @@ public class Cliente {
             dados[i][0] = cliente.getId();
             dados[i][1] = cliente.getNome();
             dados[i][2] = cliente.getCpf();
-            dados[i][3] = cliente.getEmail();
-            dados[i][4] = cliente.getMunicipio().getId();
-            dados[i][5] = cliente.getMunicipio().getNome();
-            dados[i][6] = cliente.getMunicipio().getEstado().getId();
-            dados[i][7] = cliente.getMunicipio().getEstado().getNome();
-            dados[i][8] = cliente.getEndereco();
-            dados[i][9] = cliente.getTelefone();
+            dados[i][3] = cliente.getTelefone();
+            dados[i][4] = cliente.getEndereco();
+            dados[i][5] = cliente.getMunicipio().getId();
+            dados[i][6] = cliente.getMunicipio().getNome();
+            dados[i][7] = cliente.getMunicipio().getEstado().getId();
+            dados[i][8] = cliente.getMunicipio().getEstado().getNome();
+            dados[i][9] = cliente.getEmail();
 
         }
 

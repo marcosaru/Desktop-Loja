@@ -8,10 +8,15 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
+import com.jformdesigner.C;
+import lombok.Getter;
+import lombok.Setter;
 import net.miginfocom.swing.*;
+import org.app.Views.Cad.CadCliente;
 import org.app.repository.ClienteRepositorio;
 import org.app.repository.MunicipioRepositorio;
 
+import static javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS;
 import static javax.swing.JTable.AUTO_RESIZE_OFF;
 
 /**
@@ -19,9 +24,13 @@ import static javax.swing.JTable.AUTO_RESIZE_OFF;
  */
 public class ListCliente extends JFrame {
     private Object[][] dados=null;
-    private String[] colunas = {"ID","Nome","CPF","Email","ID Municipio","Municipio","ID Estado","Estado","Endereco","Telefone"};
-    public ListCliente() {
+    @Getter
+    @Setter
+    private int modo;
+    private String[] colunas = {"ID","Nome","CPF","Telefone","Endereco","ID Municipio","Municipio","ID Estado","Estado","Email"};
+    public ListCliente(int modo) {
         initComponents();
+        setModo(modo);
         setVisible(true);
         setSize(900, 550);
         setLocationRelativeTo(null);
@@ -39,11 +48,11 @@ public class ListCliente extends JFrame {
         tbl.setModel(model);
         tbl.getTableHeader().setResizingAllowed(false);
         tbl.getTableHeader().setReorderingAllowed(false);
-        tbl.setAutoResizeMode(AUTO_RESIZE_OFF);
         tbl.getColumnModel().getColumn(0).setPreferredWidth(30);
         tbl.getColumnModel().getColumn(1).setPreferredWidth(190);
-        tbl.getColumnModel().getColumn(2).setPreferredWidth(30);
+        tbl.getColumnModel().getColumn(2).setPreferredWidth(200);
         tbl.getColumnModel().getColumn(3).setPreferredWidth(190);
+        tbl.setAutoResizeMode(AUTO_RESIZE_OFF);
     }
 
     private void thisKeyPressed(KeyEvent e) {
@@ -55,7 +64,7 @@ public class ListCliente extends JFrame {
     }
 
     private void btnIncluir(ActionEvent e) {
-        // TODO add your code here
+        CadCliente cadCliente = new CadCliente();
     }
 
     private void tblMouseClicked(MouseEvent e) {

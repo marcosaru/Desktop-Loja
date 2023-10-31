@@ -5,8 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.app.repository.MunicipioRepositorio;
 
+import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +18,20 @@ public class Municipio {
     private long id;
     private String nome;
     private Estado estado;
+
+    public Municipio(HttpResponse<String> response) {
+        String json = response.body();
+
+        Gson gson = new Gson();
+        Municipio municipio = gson.fromJson(json, Municipio.class);
+        this.nome = municipio.getNome();
+        this.id = municipio.getId();
+    }
+
+    public Municipio(String id, String string) {
+        this.id = Long.parseLong(id);
+        this.nome = string;
+    }
 
     @Override
     public String toString() {

@@ -33,6 +33,10 @@ public class CadMunicipio extends JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
+    public static void setMunicipioSelecionado(Object[] municipio) {
+     //
+    }
+
     private void button1(ActionEvent e) {
         // TODO add your code here
     }
