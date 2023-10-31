@@ -38,17 +38,15 @@ public class MunicipioRepositorio {
                 .header("Content-Type", "application/json")
                 .GET()
                 .build();
-
+        Optional<Municipio> munEncontrado;
         try{
             HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
             if (response.statusCode() == 200){
-                Optional<Municipio> munEncontrado = Optional.of(new Municipio(response));
-                return munEncontrado;
+                return Optional.of(new Municipio(response));
             }
-
         }catch (Exception e){
             e.printStackTrace();
         }
-        return null;
+        return Optional.empty();
     }
 }
